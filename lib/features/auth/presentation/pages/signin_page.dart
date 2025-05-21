@@ -1,4 +1,5 @@
 import 'package:blog_app/core/theme/pallete.dart';
+import 'package:blog_app/features/auth/presentation/pages/signup_page.dart';
 import 'package:blog_app/features/auth/presentation/widgets/auth_button.dart';
 import 'package:blog_app/features/auth/presentation/widgets/auth_field.dart';
 import 'package:flutter/material.dart';
@@ -46,21 +47,29 @@ class _SigninPageState extends State<SigninPage> {
                   isHide: true,
                 ),
                 SizedBox(height: 15),
-                AuthButton(buttonText: "Signin"),
+                AuthButton(buttonText: "Signin", onPressed: () {}),
                 SizedBox(height: 15),
-                RichText(
-                  text: TextSpan(
-                    text: "Don't have an Account? ",
-                    style: Theme.of(context).textTheme.titleMedium,
-                    children: [
-                      TextSpan(
-                        text: "Signup",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Pallete.gradient1,
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => SignupPage()),
+                    );
+                  },
+                  child: RichText(
+                    text: TextSpan(
+                      text: "Don't have an Account? ",
+                      style: Theme.of(context).textTheme.titleMedium,
+                      children: [
+                        TextSpan(
+                          text: "Signup",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Pallete.gradient1,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ],
@@ -69,6 +78,5 @@ class _SigninPageState extends State<SigninPage> {
         ),
       ),
     );
-    ;
   }
 }

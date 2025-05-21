@@ -1,7 +1,10 @@
 import 'package:blog_app/core/theme/pallete.dart';
+import 'package:blog_app/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:blog_app/features/auth/presentation/pages/signin_page.dart';
 import 'package:blog_app/features/auth/presentation/widgets/auth_button.dart';
 import 'package:blog_app/features/auth/presentation/widgets/auth_field.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({super.key});
@@ -16,6 +19,18 @@ class _SignupPageState extends State<SignupPage> {
   final TextEditingController _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
+  void handlePress() {
+    if (_formKey.currentState!.validate()) {
+      BlocProvider.of<AuthBloc>(context).add(
+        AuthSignup(
+          name: _nameController.text.trim(),
+          email: _emailController.text.trim(),
+          password: _passwordController.text.trim(),
+        ),
+      );
+    }
+  }
+
   @override
   void dispose() {
     _nameController.dispose();
@@ -27,6 +42,7 @@ class _SignupPageState extends State<SignupPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       body: Center(
         child: Padding(
           padding: EdgeInsets.all(15.0),
@@ -50,21 +66,29 @@ class _SignupPageState extends State<SignupPage> {
                   isHide: true,
                 ),
                 SizedBox(height: 15),
-                AuthButton(buttonText: "Signup"),
+                AuthButton(buttonText: "Signup", onPressed: handlePress),
                 SizedBox(height: 15),
-                RichText(
-                  text: TextSpan(
-                    text: "Already have an Account? ",
-                    style: Theme.of(context).textTheme.titleMedium,
-                    children: [
-                      TextSpan(
-                        text: "Signin",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Pallete.gradient1,
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => SigninPage()),
+                    );
+                  },
+                  child: RichText(
+                    text: TextSpan(
+                      text: "Already have an Account? ",
+                      style: Theme.of(context).textTheme.titleMedium,
+                      children: [
+                        TextSpan(
+                          text: "Signin",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Pallete.gradient1,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ],
