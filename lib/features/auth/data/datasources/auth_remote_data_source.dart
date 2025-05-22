@@ -1,16 +1,17 @@
+import 'package:blog_app/features/auth/data/models/user_model.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 // import 'package:firebase_auth/firebase_auth.dart';
 import 'package:blog_app/core/error/exceptions.dart';
 
 abstract interface class AuthRemoteDataSource {
-  Future<String> signup({
+  Future<UserModel> signup({
     required String name,
     required String email,
     required String password,
   });
 
-  Future<String> signin({required String email, required String password});
+  Future<UserModel> signin({required String email, required String password});
 }
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
@@ -19,34 +20,28 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   AuthRemoteDataSourceImpl({required this.supabaseClient});
 
   @override
-  Future<String> signup({
+  Future<UserModel> signup({
     required String name,
     required String email,
     required String password,
   }) async {
     try {
-      // ignore: avoid_print
-      print("SupabaseClient: $supabaseClient");
-      // ignore: avoid_print
-      print("Email: $email");
       final response = await supabaseClient.auth.signUp(
         email: email,
         password: password,
         data: {"name": name},
       );
-      // ignore: avoid_print
-      print(response.user!.id);
       if (response.user == null) {
         throw ServerException("User is null");
       }
-      return response.user!.id;
+      return UserModel.fromJson(response.user!.toJson());
     } catch (e) {
       throw ServerException(e.toString());
     }
   }
 
   @override
-  Future<String> signin({
+  Future<UserModel> signin({
     required String email,
     required String password,
   }) async {
@@ -55,7 +50,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       password: password,
     );
 
-    return response.user!.id;
+    return UserModel.fromJson(response.user!.toJson());
   }
 }
 

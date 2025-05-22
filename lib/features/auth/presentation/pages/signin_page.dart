@@ -31,48 +31,50 @@ class _SigninPageState extends State<SigninPage> {
           padding: EdgeInsets.all(15.0),
           child: Form(
             key: _formKey,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "Signin",
-                  style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold),
-                ),
-                SizedBox(height: 30),
-                AuthField(hintText: "Email", controller: _emailController),
-                SizedBox(height: 15),
-                AuthField(
-                  hintText: "Password",
-                  controller: _passwordController,
-                  isHide: true,
-                ),
-                SizedBox(height: 15),
-                AuthButton(buttonText: "Signin", onPressed: () {}),
-                SizedBox(height: 15),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => SignupPage()),
-                    );
-                  },
-                  child: RichText(
-                    text: TextSpan(
-                      text: "Don't have an Account? ",
-                      style: Theme.of(context).textTheme.titleMedium,
-                      children: [
-                        TextSpan(
-                          text: "Signup",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Pallete.gradient1,
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Signin",
+                    style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(height: 30),
+                  AuthField(hintText: "Email", controller: _emailController),
+                  SizedBox(height: 15),
+                  AuthField(
+                    hintText: "Password",
+                    controller: _passwordController,
+                    isHide: true,
+                  ),
+                  SizedBox(height: 15),
+                  AuthButton(buttonText: "Signin", onPressed: () {}),
+                  SizedBox(height: 15),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => SignupPage()),
+                      );
+                    },
+                    child: RichText(
+                      text: TextSpan(
+                        text: "Don't have an Account? ",
+                        style: Theme.of(context).textTheme.titleMedium,
+                        children: [
+                          TextSpan(
+                            text: "Signup",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Pallete.gradient1,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
