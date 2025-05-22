@@ -1,5 +1,5 @@
-import 'package:blog_app/core/theme/pallete.dart';
 import 'package:flutter/material.dart';
+import 'package:blog_app/core/theme/pallete.dart';
 
 class AuthButton extends StatelessWidget {
   final String buttonText;
