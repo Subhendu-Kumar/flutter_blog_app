@@ -1,7 +1,6 @@
-// import 'package:blog_app/core/error/exceptions.dart';
-// import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
-import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:blog_app/core/error/exceptions.dart';
 
 abstract interface class AuthRemoteDataSource {
@@ -14,48 +13,10 @@ abstract interface class AuthRemoteDataSource {
   Future<String> signin({required String email, required String password});
 }
 
-// class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
-//   final SupabaseClient supabaseClient;
-
-//   AuthRemoteDataSourceImpl({required this.supabaseClient});
-
-//   @override
-//   Future<String> signup({
-//     required String name,
-//     required String email,
-//     required String password,
-//   }) async {
-//     try {
-//       final response = await supabaseClient.auth.signUp(
-//         email: email,
-//         password: password,
-//         data: {"name": name},
-//       );
-//       if (response.user == null) {
-//         throw ServerException("User is null");
-//       }
-//       return response.user!.id;
-//     } catch (e) {
-//       throw ServerException(e.toString());
-//     }
-//   }
-
-//   @override
-//   Future<String> signin({
-//     required String email,
-//     required String password,
-//   }) async {
-//     final response = await supabaseClient.auth.signInWithPassword(
-//       email: email,
-//       password: password,
-//     );
-
-//     return response.user!.id;
-//   }
-// }
-
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final SupabaseClient supabaseClient;
+
+  AuthRemoteDataSourceImpl({required this.supabaseClient});
 
   @override
   Future<String> signup({
@@ -64,18 +25,21 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     required String password,
   }) async {
     try {
-      final userCredential = await _auth.createUserWithEmailAndPassword(
+      // ignore: avoid_print
+      print("SupabaseClient: $supabaseClient");
+      // ignore: avoid_print
+      print("Email: $email");
+      final response = await supabaseClient.auth.signUp(
         email: email,
         password: password,
+        data: {"name": name},
       );
-
-      // Optionally update display name
-      await userCredential.user?.updateDisplayName(name);
-
-      if (userCredential.user == null) {
+      // ignore: avoid_print
+      print(response.user!.id);
+      if (response.user == null) {
         throw ServerException("User is null");
       }
-      return userCredential.user!.uid;
+      return response.user!.id;
     } catch (e) {
       throw ServerException(e.toString());
     }
@@ -86,14 +50,55 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     required String email,
     required String password,
   }) async {
-    try {
-      final userCredential = await _auth.signInWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-      return userCredential.user!.uid;
-    } catch (e) {
-      throw ServerException(e.toString());
-    }
+    final response = await supabaseClient.auth.signInWithPassword(
+      email: email,
+      password: password,
+    );
+
+    return response.user!.id;
   }
 }
+
+// class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
+//   final FirebaseAuth _auth = FirebaseAuth.instance;
+
+//   @override
+//   Future<String> signup({
+//     required String name,
+//     required String email,
+//     required String password,
+//   }) async {
+//     try {
+//       final userCredential = await _auth.createUserWithEmailAndPassword(
+//         email: email,
+//         password: password,
+//       );
+
+//       // Optionally update display name
+//       await userCredential.user?.updateDisplayName(name);
+
+//       if (userCredential.user == null) {
+//         throw ServerException("User is null");
+//       }
+//       return userCredential.user!.uid;
+//     } catch (e) {
+//       throw ServerException(e.toString());
+//     }
+//   }
+
+//   @override
+//   Future<String> signin({
+//     required String email,
+//     required String password,
+//   }) async {
+//     try {
+//       final userCredential = await _auth.signInWithEmailAndPassword(
+//         email: email,
+//         password: password,
+//       );
+//       return userCredential.user!.uid;
+//     } catch (e) {
+//       throw ServerException(e.toString());
+//     }
+//   }
+// }
