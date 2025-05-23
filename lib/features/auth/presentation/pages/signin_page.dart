@@ -53,10 +53,7 @@ class _SigninPageState extends State<SigninPage> {
             child: BlocConsumer<AuthBloc, AuthState>(
               listener: (context, state) {
                 if (state is AuthFailure) {
-                  showSnackBar(context, state.message);
-                }
-                if (state is AuthSuccess) {
-                  clearFormFields();
+                  showSnackBar(context, state.message.toString());
                 }
               },
               builder: (context, state) {

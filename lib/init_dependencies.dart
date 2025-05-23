@@ -1,6 +1,8 @@
 // import 'firebase_options.dart';
 // import 'package:firebase_core/firebase_core.dart';
 
+import 'package:blog_app/core/common/cubits/app_user/app_user_cubit.dart';
+import 'package:blog_app/features/auth/domain/usecases/current_user.dart';
 import 'package:get_it/get_it.dart';
 import 'package:blog_app/core/secrets/app_secrets.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -21,6 +23,9 @@ Future<void> initDependencies() async {
   );
   serviceLocator.registerLazySingleton(() => supabase.client);
   // await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
+  //core
+  serviceLocator.registerLazySingleton(() => AppUserCubit());
 }
 
 void _initAuth() {
@@ -32,7 +37,13 @@ void _initAuth() {
   );
   serviceLocator.registerFactory(() => UserSignUp(serviceLocator()));
   serviceLocator.registerFactory(() => UserSignIn(serviceLocator()));
+  serviceLocator.registerFactory(() => CurrentUser(serviceLocator()));
   serviceLocator.registerLazySingleton(
-    () => AuthBloc(userSignUp: serviceLocator(), userSignIn: serviceLocator()),
+    () => AuthBloc(
+      userSignUp: serviceLocator(),
+      userSignIn: serviceLocator(),
+      currentUser: serviceLocator(),
+      appUserCubit: serviceLocator(),
+    ),
   );
 }
