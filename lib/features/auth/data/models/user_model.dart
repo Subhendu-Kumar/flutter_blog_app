@@ -5,12 +5,19 @@ class UserModel extends User {
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
-      id: json['id'] as String,
-      name: json['name'] as String,
-      email: json['email'] as String,
+      id: json['id'] ?? "",
+      name: json['name'] ?? "",
+      email: json['email'] ?? "",
     );
   }
-  
+  factory UserModel.fromJson2(Map<String, dynamic> json) {
+    return UserModel(
+      id: json['id'] ?? "",
+      name: json['raw_user_meta_data']["name"] ?? "",
+      email: json['email'] ?? "",
+    );
+  }
+
   UserModel copyWith({String? id, String? name, String? email}) {
     return UserModel(
       id: id ?? this.id,
