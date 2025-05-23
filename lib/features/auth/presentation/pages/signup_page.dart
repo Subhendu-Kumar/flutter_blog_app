@@ -1,3 +1,4 @@
+import 'package:blog_app/features/blog/presentation/pages/blog_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:blog_app/core/theme/pallete.dart';
@@ -58,6 +59,13 @@ class _SignupPageState extends State<SignupPage> {
             listener: (context, state) {
               if (state is AuthFailure) {
                 showSnackBar(context, state.message.toString());
+              }
+              if (state is AuthSuccess) {
+                showSnackBar(context, "Signup Successful");
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => BlogPage()),
+                );
               }
             },
             builder: (context, state) {

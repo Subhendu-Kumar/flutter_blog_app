@@ -21,7 +21,6 @@ class BlogEditor extends StatelessWidget {
         return null;
       },
       decoration: InputDecoration(hintText: hintText),
-      maxLines: null,
     );
   }
 }
