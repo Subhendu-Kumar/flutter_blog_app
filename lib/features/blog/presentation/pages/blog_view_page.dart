@@ -1,6 +1,6 @@
-import 'package:blog_app/core/utils/calculate_reading_time.dart';
-import 'package:blog_app/core/utils/format_date.dart';
 import 'package:flutter/material.dart';
+import 'package:blog_app/core/utils/format_date.dart';
+import 'package:blog_app/core/utils/calculate_reading_time.dart';
 import 'package:blog_app/features/blog/domain/entities/blog.dart';
 
 class BlogViewPage extends StatelessWidget {

@@ -1,24 +1,23 @@
 import 'dart:io';
-
-import 'package:blog_app/core/error/exceptions.dart';
+import 'package:uuid/uuid.dart';
+import 'package:fpdart/fpdart.dart';
 import 'package:blog_app/core/error/failures.dart';
+import 'package:blog_app/core/error/exceptions.dart';
 import 'package:blog_app/core/network/connection_checker.dart';
+import 'package:blog_app/features/blog/domain/entities/blog.dart';
+import 'package:blog_app/features/blog/data/models/blog_model.dart';
+import 'package:blog_app/features/blog/domain/repository/blog_repository.dart';
 import 'package:blog_app/features/blog/data/datasources/blog_local_data_source.dart';
 import 'package:blog_app/features/blog/data/datasources/blog_remote_data_source.dart';
-import 'package:blog_app/features/blog/data/models/blog_model.dart';
-import 'package:blog_app/features/blog/domain/entities/blog.dart';
-import 'package:blog_app/features/blog/domain/repository/blog_repository.dart';
-import 'package:fpdart/fpdart.dart';
-import 'package:uuid/uuid.dart';
 
 class BlogRepositoryImpl implements BlogRepository {
-  final BlogRemoteDataSource blogRemoteDataSource;
-  final BlogLocalDataSource blogLocalDataSource;
   final ConnectionChecker connectionChecker;
+  final BlogLocalDataSource blogLocalDataSource;
+  final BlogRemoteDataSource blogRemoteDataSource;
 
   BlogRepositoryImpl({
-    required this.blogLocalDataSource,
     required this.connectionChecker,
+    required this.blogLocalDataSource,
     required this.blogRemoteDataSource,
   });
 
@@ -26,8 +25,8 @@ class BlogRepositoryImpl implements BlogRepository {
   Future<Either<Failure, Blog>> uploadBlog({
     required File image,
     required String title,
-    required String description,
     required String author,
+    required String description,
     required List<String> topics,
   }) async {
     try {
@@ -36,11 +35,11 @@ class BlogRepositoryImpl implements BlogRepository {
       }
       BlogModel blogModel = BlogModel(
         id: const Uuid().v4(),
-        author: author,
         title: title,
-        description: description,
         imageUrl: "",
+        author: author,
         topics: topics,
+        description: description,
         updatedAt: DateTime.now(),
       );
       final imageUrl = await blogRemoteDataSource.getBlogImageUrl(

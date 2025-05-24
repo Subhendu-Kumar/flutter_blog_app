@@ -1,5 +1,3 @@
-// import 'package:firebase_auth/firebase_auth.dart';
-
 import 'package:blog_app/core/error/exceptions.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:blog_app/features/auth/data/models/user_model.dart';

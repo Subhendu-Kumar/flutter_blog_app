@@ -1,11 +1,10 @@
 import 'dart:io';
-
-import 'package:blog_app/core/usecase/usecase.dart';
-import 'package:blog_app/features/blog/domain/entities/blog.dart';
-import 'package:blog_app/features/blog/domain/usecases/get_all_blogs.dart';
-import 'package:blog_app/features/blog/domain/usecases/upload_blog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:blog_app/core/usecase/usecase.dart';
+import 'package:blog_app/features/blog/domain/entities/blog.dart';
+import 'package:blog_app/features/blog/domain/usecases/upload_blog.dart';
+import 'package:blog_app/features/blog/domain/usecases/get_all_blogs.dart';
 
 part 'blog_event.dart';
 part 'blog_state.dart';
@@ -24,9 +23,9 @@ class BlogBloc extends Bloc<BlogEvent, BlogState> {
         UploadBlogParams(
           image: event.image,
           title: event.title,
-          description: event.description,
           author: event.author,
           topics: event.topics,
+          description: event.description,
         ),
       );
       res.fold(
@@ -34,7 +33,7 @@ class BlogBloc extends Bloc<BlogEvent, BlogState> {
         (blog) => emit(BlogSuccess()),
       );
     });
-    
+
     on<BlogGetAll>((event, emit) async {
       emit(BlogLoading());
       final res = await _getAllBlogs(NoParams());

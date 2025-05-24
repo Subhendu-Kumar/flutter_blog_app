@@ -1,20 +1,20 @@
-import 'package:blog_app/core/error/exceptions.dart';
-import 'package:blog_app/core/network/connection_checker.dart';
-import 'package:blog_app/features/auth/data/models/user_model.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:blog_app/core/error/failures.dart';
-import 'package:supabase_flutter/supabase_flutter.dart' as sb;
+import 'package:blog_app/core/error/exceptions.dart';
 import 'package:blog_app/core/common/entities/user.dart';
+import 'package:supabase_flutter/supabase_flutter.dart' as sb;
+import 'package:blog_app/core/network/connection_checker.dart';
+import 'package:blog_app/features/auth/data/models/user_model.dart';
 import 'package:blog_app/features/auth/domain/repository/auth_repository.dart';
 import 'package:blog_app/features/auth/data/datasources/auth_remote_data_source.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
-  final AuthRemoteDataSource authRemoteDataSource;
   final ConnectionChecker connectionChecker;
+  final AuthRemoteDataSource authRemoteDataSource;
 
   AuthRepositoryImpl({
-    required this.authRemoteDataSource,
     required this.connectionChecker,
+    required this.authRemoteDataSource,
   });
 
   @override
