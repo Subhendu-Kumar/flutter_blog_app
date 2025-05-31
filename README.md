@@ -2,6 +2,16 @@
 
 A modern blog application built with Flutter and Firebase following Clean Architecture principles. This app allows users to create, read, update, and delete blog posts with proper separation of concerns and maintainable code structure.
 
+## 📱 Demo Screenshots
+
+<div align="center">
+  <img src="assets/screenshots/Screenshot_1748703826.png" width="200" alt="Signup Screen"/>
+  <img src="assets/screenshots/Screenshot_1748703821.png" width="200" alt="Signin Screen"/>
+  <img src="assets/screenshots/Screenshot_1748704153.png" width="200" alt="Home page"/>
+  <img src="assets/screenshots/Screenshot_1748704160.png" width="200" alt="Add blog page"/>
+  <img src="assets/screenshots/Screenshot_1748704174.png" width="200" alt="Blog reading page"/>
+</div>
+
 ## Features
 
 - **Authentication**
@@ -63,84 +73,40 @@ lib/
 │   │   ├── entities/                   # Core entities
 │   │   └── widgets/                    # Reusable widgets
 │   ├── error/                          # Error handling
-│   │   ├── exceptions.dart             # Custom exceptions
-│   │   └── failures.dart               # Failure classes
 │   ├── network/                        # Network utilities
-│   │   └── connection_checker.dart     # Internet connectivity
 │   ├── secrets/                        # API keys and secrets
-│   │   └── app_secrets.dart            # Secret constants
 │   ├── theme/                          # App theming
-│   │   ├── pallete.dart                # Color palette
-│   │   └── theme.dart                  # Theme configuration
 │   ├── usecase/                        # Base use case classes
-│   │   └── usecase.dart                # Abstract use case
 │   └── utils/                          # Utility functions
-│       ├── calculate_reading_time.dart # Blog reading time calculator
-│       ├── format_date.dart            # Date formatting
-│       └── pick_image.dart             # Image picker utility
-│       └── show_snackbar.dart          # snackbar utility
 │
 ├── features/                           # Feature modules
 │   ├── auth/                           # Authentication feature
 │   │   ├── data/                       # Data layer
 │   │   │   ├── datasources/            # Data sources
-│   │   │   │   ├── auth_remote_data_source.dart
-│   │   │   │   └── auth_remote_data_source_impl.dart
 │   │   │   ├── models/                 # Data models
-│   │   │   │   └── user_model.dart     # User data model
 │   │   │   └── repositories/           # Repository implementations
-│   │   │       └── auth_repository_impl.dart
 │   │   ├── domain/                     # Domain layer
 │   │   │   ├── entities/               # Domain entities
-│   │   │   │   └── user.dart           # User entity
 │   │   │   ├── repository/             # Repository interfaces
-│   │   │   │   └── auth_repository.dart
 │   │   │   └── usecases/               # Use cases
-│   │   │       ├── current_user.dart
-│   │   │       ├── user_login.dart
-│   │   │       └── user_sign_up.dart
 │   │   └── presentation/               # Presentation layer
 │   │       ├── bloc/                   # BLoC/Cubit
-│   │       │   ├── auth_bloc.dart
-│   │       │   ├── auth_event.dart
-│   │       │   └── auth_state.dart
 │   │       ├── pages/                  # UI screens
-│   │       │   ├── login_page.dart
-│   │       │   └── signup_page.dart
 │   │       └── widgets/                # Feature-specific widgets
-│   │           ├── auth_field.dart
-│   │           └── auth_button.dart
 │   │
 │   └── blog/                           # Blog feature
 │       ├── data/                       # Data layer
 │       │   ├── datasources/            # Data sources
-│       │   │   ├── blog_local_data_source.dart
-│       │   │   ├── blog_remote_data_source.dart
-│       │   │   └── blog_remote_data_source_impl.dart
 │       │   ├── models/                 # Data models
-│       │   │   └── blog_model.dart     # Blog data model
 │       │   └── repositories/           # Repository implementations
-│       │       └── blog_repository_impl.dart
 │       ├── domain/                     # Domain layer
 │       │   ├── entities/               # Domain entities
-│       │   │   └── blog.dart           # Blog entity
 │       │   ├── repository/             # Repository interfaces
-│       │   │   └── blog_repository.dart
 │       │   └── usecases/               # Use cases
-│       │       ├── get_all_blogs.dart
-│       │       └── upload_blog.dart
 │       └── presentation/               # Presentation layer
 │           ├── bloc/                   # BLoC/Cubit
-│           │   ├── blog_bloc.dart
-│           │   ├── blog_event.dart
-│           │   └── blog_state.dart
 │           ├── pages/                  # UI screens
-│           │   ├── add_new_blog_page.dart
-│           │   ├── blog_page.dart
-│           │   └── blog_viewer_page.dart
 │           └── widgets/                # Feature-specific widgets
-│               ├── blog_card.dart
-│               └── blog_editor.dart
 ```
 
 ## Data Models
@@ -295,51 +261,6 @@ Data access is abstracted through repository interfaces:
 - Domain layer defines repository contracts
 - Data layer implements these contracts
 - Presentation layer depends on abstractions, not implementations
-
-## Running the App
-
-```bash
-flutter run
-```
-
-## Building for Production
-
-### Android
-
-```bash
-flutter build apk --release
-# or
-flutter build appbundle --release
-```
-
-### iOS
-
-```bash
-flutter build ios --release
-```
-
-## Testing
-
-The clean architecture makes testing straightforward:
-
-```bash
-# Run all tests
-flutter test
-
-# Run tests with coverage
-flutter test --coverage
-```
-
-## Common Issues and Solutions
-
-1. **Dependency Injection Issues**
-
-   - Ensure all dependencies are registered in `init_dependencies.dart`
-   - Check if services are properly initialized before use
-
-2. **BLoC State Issues**
-   - Verify proper event handling in BLoC classes
-   - Check if initial states are properly set
 
 ## Contributing
 
