@@ -5,11 +5,11 @@ A modern blog application built with Flutter and Firebase following Clean Archit
 ## 📱 Demo Screenshots
 
 <div align="center">
-  <img src="assets/screenshots/Screenshot_1748703826.png" width="200" alt="Signup Screen"/>
-  <img src="assets/screenshots/Screenshot_1748703821.png" width="200" alt="Signin Screen"/>
-  <img src="assets/screenshots/Screenshot_1748704153.png" width="200" alt="Home page"/>
-  <img src="assets/screenshots/Screenshot_1748704160.png" width="200" alt="Add blog page"/>
-  <img src="assets/screenshots/Screenshot_1748704174.png" width="200" alt="Blog reading page"/>
+  <img src="assets/screenshots/Screenshot_1748703826.png" width="266" alt="Signup Screen"/>
+  <img src="assets/screenshots/Screenshot_1748703821.png" width="266" alt="Signin Screen"/>
+  <img src="assets/screenshots/Screenshot_1748704153.png" width="266" alt="Home page"/>
+  <img src="assets/screenshots/Screenshot_1748704160.png" width="266" alt="Add blog page"/>
+  <img src="assets/screenshots/Screenshot_1748704174.png" width="266" alt="Blog reading page"/>
 </div>
 
 ## Features
